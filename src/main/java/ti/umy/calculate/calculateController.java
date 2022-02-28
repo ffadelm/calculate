@@ -13,10 +13,32 @@ public class calculateController {
         
         String num1 = param.getParameter("num1");
         String num2 = param.getParameter("num2");
-
-        int hitung = Integer.parseInt(num1) + Integer.parseInt(num2);
+        String operator = param.getParameter("operator");
+        double result;
         
-        model.addAttribute("dataHistory", hitung);
+        switch (operator) {
+            case "+":
+                result = Double.parseDouble(num1) + Double.parseDouble(num2);
+                break;
+            case "-":
+                result = Double.parseDouble(num1) - Double.parseDouble(num2);
+                break;
+            case "*":
+                result = Double.parseDouble(num1) * Double.parseDouble(num2);
+                break;
+            case "/":
+                result = Double.parseDouble(num1) / Double.parseDouble(num2);
+                break;
+            default:
+                result = 0;
+        }
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        model.addAttribute("Num1", num1);
+        model.addAttribute("Num2", num2);
+        model.addAttribute("Operator", operator);
+        model.addAttribute("Result", df.format(result));
         return "Index";
     }
 }
